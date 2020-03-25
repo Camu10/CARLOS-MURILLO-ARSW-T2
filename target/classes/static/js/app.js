@@ -140,6 +140,7 @@ var app = (function () {
     };
 
     function getCovid19ByCountry(name) {
+        clearMap();
         apiClient.getCovid19ByCountry(name,plotMarkers);
 
     }
