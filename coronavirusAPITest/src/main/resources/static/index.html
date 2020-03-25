@@ -1,0 +1,72 @@
+<!doctype html>
+
+<html lang="en">
+    <head>
+        <title>Covid-19</title>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css"
+              integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+        <script src="/webjars/jquery/3.1.0/jquery.min.js"></script>
+
+        <script src="/webjars/bootstrap/4.1.2/js/bootstrap.min.js"></script>
+        <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+        <script type="text/javascript" src="js/apiClient.js"></script>
+        <script type="text/javascript" src="js/app.js" ></script>
+        <link rel="stylesheet"
+              href="/webjars/bootstrap/4.1.2/css/bootstrap.min.css" />
+    </head>
+
+    <h1>Covid-19</h1>
+    
+    <body onload="app.getAllCovid19()">
+        <div class="container">
+            <table id="tableAll"  class="table table-bordered">
+                <thead>
+                <tr>
+                    <th scope="col">Country</th>
+                    <th scope="col">Deaths</th>
+                    <th scope="col">Confirmed</th>
+                    <th scope="col">Recovered</th>
+                </tr>
+                </thead>
+                <tbody>
+                <!-- Se generan datos con los js -->
+                </tbody>
+            </table>
+
+            <p>
+            Country: <input id="country" type="text">
+            <button type="button" onclick="app.getCovid19ByCountry(country.value)">Search</button>
+            </p>
+
+            <table id="tableTotal"  class="table table-bordered">
+                <thead>
+                <tr>
+                    <th scope="col">Province</th>
+                    <th scope="col">Confirmed</th>
+                    <th scope="col">Deaths</th>
+                    <th scope="col">Recovered</th>
+                </tr>
+                </thead>
+                <tbody>
+                <!-- Se generan datos con los js -->
+                </tbody>
+            </table>
+
+            <table id="table"  class="table table-bordered">
+                <thead>
+                <tr>
+                    <th scope="col">Province</th>
+                    <th scope="col">Confirmed</th>
+                    <th scope="col">Deaths</th>
+                    <th scope="col">Recovered</th>
+                </tr>
+                </thead>
+                <tbody>
+                <!-- Se generan datos con los js -->
+                </tbody>
+            </table>
+        </div>
+    </body>
+</html>
