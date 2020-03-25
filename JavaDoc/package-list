@@ -1,0 +1,10 @@
+coronavirusAPITest
+edu.eci.arsw.coronavirusAPI
+edu.eci.arsw.coronavirusAPI.cache
+edu.eci.arsw.coronavirusAPI.cache.impl
+edu.eci.arsw.coronavirusAPI.connection
+edu.eci.arsw.coronavirusAPI.connection.impl
+edu.eci.arsw.coronavirusAPI.controllers
+edu.eci.arsw.coronavirusAPI.model
+edu.eci.arsw.coronavirusAPI.service
+edu.eci.arsw.coronavirusAPI.service.impl
