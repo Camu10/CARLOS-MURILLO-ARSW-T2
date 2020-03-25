@@ -3,7 +3,8 @@
 ## Requerimientos de Entrega
 1. El link para el despligue en [Heroku](https://carlos-murillo-arsw-t2.herokuapp.com/) , link del repositorio de [GitHub](https://github.com/Camu10/CARLOS-MURILLO-ARSW-T2.git)  
 2. El JavaDoc fue generado en el directorio JavaDoc.  
-3. - El diseño de la arquitectura que se realizó fue el de cliente/servidor en el cual se tiene un Java que actua como servidor pero al mismo de cliente por que consume de un API externo y se tiene un apiClient.js que actua como cliente de este Java y lo consume.
+3. 
+- El diseño de la arquitectura que se realizó fue el de cliente/servidor en el cual se tiene un Java que actua como servidor pero al mismo de cliente por que consume de un API externo y se tiene un apiClient.js que actua como cliente de este Java y lo consume.
 - Para ejuctar el programa de manera local en el directorio `CARLOS-MURILLO-ARSW-T2`:  
     - **Para compilar:** `mvn package`  
     - **Para ejecutar el proyecto:** `mvn spring-boot:run`  
