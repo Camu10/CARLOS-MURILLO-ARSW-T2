@@ -8,6 +8,7 @@ import com.mashape.unirest.http.Unirest;
 import com.mashape.unirest.http.HttpResponse;
 import com.mashape.unirest.http.exceptions.UnirestException;
 import edu.eci.arsw.coronavirusAPI.cache.Covid19Cache;
+import edu.eci.arsw.coronavirusAPI.cache.impl.Covid19CacheImpl;
 import edu.eci.arsw.coronavirusAPI.model.Country;
 import edu.eci.arsw.coronavirusAPI.model.Province;
 import edu.eci.arsw.coronavirusAPI.service.Covid19Services;
@@ -18,6 +19,7 @@ import org.springframework.stereotype.Service;
 
 import java.io.UnsupportedEncodingException;
 import java.net.URLEncoder;
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -32,6 +34,8 @@ public class Covid19ServicesImpl implements Covid19Services {
 
     @Autowired
     private Covid19Cache covid19Cache;
+    @Autowired
+    private Covid19ServicesLocationImpl covid19ServicesLocation;
 
     public Covid19ServicesImpl() {
         url = "https://covid-19-coronavirus-statistics.p.rapidapi.com/v1/stats?country=";
@@ -59,7 +63,7 @@ public class Covid19ServicesImpl implements Covid19Services {
         }catch (UnirestException e){
             e.printStackTrace();
         }
-        JSONArray stats = apiResponse.getBody().getObject().getJSONObject("data").getJSONArray("covid19Stats");
+            JSONArray stats = apiResponse.getBody().getObject().getJSONObject("data").getJSONArray("covid19Stats");
         return stats;
     }
 
@@ -93,15 +97,29 @@ public class Covid19ServicesImpl implements Covid19Services {
     @Override
     public List<Province> getCovid19ByCountry(String name) {
         JSONArray stats = HTTPConnection(name);
+        JSONArray coordenadas = covid19ServicesLocation.HTTPConnection(name);
         //System.out.println(stats);
-        /*for(int i = 0; i<stats.length();i++) {
-            JSONObject superJson = (JSONObject) stats.get(i);
-            superJson.put("Probando", new JSONObject("{\"latitud\":\""+i+"\",\"longitud\":\""+(i+1)+"\"}"));
-        }*/
-        //System.out.println(stats);
+        for(int i = 0; i<stats.length();i++) {
+            JSONObject Json = (JSONObject) stats.get(i);
+            Json.put("location", new JSONObject("{\"latitude\":\""+coordenadas.get(0)+"\",\"longitude\":\""+coordenadas.get(1)+"\"}"));
+        }
+        System.out.println(stats);
         List<Province> res = null;
-        res = gson.fromJson(stats.toString(),new TypeToken<List<Province>>(){}.getType());
-        //System.out.println(res);
+        if(covid19Cache.getCovid19ByName(name) == null){
+            System.out.println("no esta en cache");
+            res = gson.fromJson(stats.toString(),new TypeToken<List<Province>>(){}.getType());
+            covid19Cache.saveCovid19(name,res);
+        }else{
+            LocalDateTime time = covid19Cache.getTime(name);
+            if(LocalDateTime.now().isAfter(time.plusMinutes(5))){
+                System.out.println("cache 5 minutos");
+                res = gson.fromJson(stats.toString(),new TypeToken<List<Province>>(){}.getType());
+                covid19Cache.saveCovid19(name,res);
+            }else{
+                System.out.println("esta en cache");
+                res = covid19Cache.getCovid19ByName(name);
+            }
+        }
         return res;
     }
 }

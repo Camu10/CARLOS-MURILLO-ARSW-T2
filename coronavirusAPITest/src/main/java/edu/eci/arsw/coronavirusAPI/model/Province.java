@@ -9,6 +9,7 @@ public class Province {
     private int confirmed;
     private int deaths;
     private int recovered;
+    private Location location;
 
     public Province(){}
 
@@ -76,4 +77,11 @@ public class Province {
         this.recovered = recovered;
     }
 
+    public Location getLocation() {
+        return location;
+    }
+
+    public void setLocation(Location location) {
+        this.location = location;
+    }
 }
