@@ -32,7 +32,7 @@ public class Covid19Controller {
             return new ResponseEntity<>(provinceListData, HttpStatus.ACCEPTED);
         }catch (Exception e){
             e.printStackTrace();
-            return new ResponseEntity<>("ERROR 500",HttpStatus.INTERNAL_SERVER_ERROR);
+            return new ResponseEntity<>("ERROR 500",HttpStatus.NOT_FOUND);
         }
     }
 
@@ -49,7 +49,7 @@ public class Covid19Controller {
             return new ResponseEntity<>(provinceListData, HttpStatus.ACCEPTED);
         }catch (Exception e){
             e.printStackTrace();
-            return new ResponseEntity<>("ERROR 500",HttpStatus.INTERNAL_SERVER_ERROR);
+            return new ResponseEntity<>("ERROR 500",HttpStatus.NOT_FOUND);
         }
     }
 }
